@@ -9,10 +9,7 @@ from discord.ext import commands
 class Main(commands.Cog):
     pattern1 = re.compile(r"^.*?/(\d*)/(\d*)$")
     with open("./db.csv", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        next(reader)
-        data = dict(reader)
-        del reader
+        data = dict(csv.reader(f))
 
     def __init__(self, bot):
         self.bot: commands.Bot = bot
@@ -21,14 +18,13 @@ class Main(commands.Cog):
         data = await self.bot.http.get_from_cdn(url)
         return hashlib.md5(data).hexdigest()
 
-    @commands.command()
-    async def hash(self, ctx, url=None):
-        if url is None:
-            await ctx.send("URLを指定してください")
-            mes = await self.bot.wait_for("message",
-                                          check=lambda m: m.author == ctx.author and m.channel == ctx.channel)
-            url = mes.content
-        await ctx.send(await self.do_hash(url))
+    async def on_message(self, message):
+        if message.author.id != 365975655608745985 or not message.embeds:
+            return
+        embed = message.embeds[0].title
+        if embed.title == "A wild pok\xe9mon has appeared!":
+            key = await self.do_hash(embed.image.url)
+            await message.channel.send(f"このポケモンの名前は{self.data[key]}です")
 
 
 bot = commands.Bot("kt!")
