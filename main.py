@@ -26,8 +26,15 @@ class Main(commands.Cog):
             key = await self.do_hash(embed.image.url)
             await message.channel.send(f"このポケモンの名前は{self.data[key]}です")
 
+    @commands.command()
+    async def stop(self, ctx):
+        if await self.bot.is_owner(ctx.author):
+            await ctx.send("停止")
+            await self.bot.close()
 
-bot = commands.Bot("kt!")
+
+
+bot = commands.Bot("kp!")
 bot.remove_command("help")
 bot.add_cog(Main(bot))
 bot.run(os.environ["token_pokecord"])
