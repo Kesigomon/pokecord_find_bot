@@ -8,7 +8,7 @@ from discord.ext import commands
 
 class Main(commands.Cog):
     pattern1 = re.compile(r"^.*?/(\d*)/(\d*)$")
-    with open("./db.csv", encoding="utf-8") as f:
+    with open("./db2.csv", encoding="utf-8") as f:
         data = dict(csv.reader(f))
 
     def __init__(self, bot):
