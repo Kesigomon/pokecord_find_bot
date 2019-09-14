@@ -30,4 +30,4 @@ class Main(commands.Cog):
 bot = commands.Bot("kt!")
 bot.remove_command("help")
 bot.add_cog(Main(bot))
-bot.run(os.environ["pokebot_token"])
+bot.run(os.environ["token_pokecord"])
