@@ -21,7 +21,7 @@ class Main(commands.Cog):
     async def on_message(self, message):
         if message.author.id != 365975655608745985 or not message.embeds:
             return
-        embed = message.embeds[0].title
+        embed = message.embeds[0]
         if embed.title == "A wild pok\xe9mon has appeared!":
             key = await self.do_hash(embed.image.url)
             await message.channel.send(f"このポケモンの名前は{self.data[key]}です")
