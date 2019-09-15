@@ -19,9 +19,14 @@ class Main(commands.Cog):
         return hashlib.md5(data).hexdigest()
 
     @commands.Cog.listener()
+    async def on_ready(self):
+        print("ready!")
+
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.id != 365975655608745985 or not message.embeds:
             return
+        print("pokecord!")
         embed = message.embeds[0]
         if embed.title == "A wild pok\xe9mon has appeared!":
             key = await self.do_hash(embed.image.url)
