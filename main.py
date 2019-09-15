@@ -18,6 +18,7 @@ class Main(commands.Cog):
         data = await self.bot.http.get_from_cdn(url)
         return hashlib.md5(data).hexdigest()
 
+    @commands.Cog.listener()
     async def on_message(self, message):
         if message.author.id != 365975655608745985 or not message.embeds:
             return
