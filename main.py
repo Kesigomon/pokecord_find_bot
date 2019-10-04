@@ -28,7 +28,7 @@ class Main(commands.Cog):
             return
         print("pokecord!")
         embed = message.embeds[0]
-        if embed.title == '‌‌A wild pokémon has appeared!':
+        if embed.title == '\u200c\u200cA wild pokémon has аppeаred!':
             key = await self.do_hash(embed.image.url)
             await message.channel.send(f"このポケモンの名前は{self.data[key]}です")
         else:
